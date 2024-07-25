@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title style="font-family: Arial, Helvetica, sans-serif;">ACE: A Cross-Platform Visual-Exoskeletons System for Low-Cost Dexterous Teleoperation</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Open Graph data  TODO: modify this later-->
+    <meta property="og:image" content="img/cover.jpg">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1296">
+    <meta property="og:image:height" content="840">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ace-teleop.github.io/"/>
+    <meta property="og:title" content="ACE: A Cross-Platform Visual-Exoskeletons System for Low-Cost Dexterous Teleoperation" />
+    <meta property="og:description" content="Bimanual robotic manipulation with dexterous hands has a large potential workability and a wide workspace as it follows the most natural human workflow. Learning from human demonstrations has proven highly effective for learning a dexterous manipulation policy. To collect such data, teleoperation serves as a straightforward and efficient way to do so. However, a cost-effective and easy-to-use teleoperation system is lacking for anthropomorphic robot hands. To fill the deficiency, we developed ACE, a cross-platform visual-exoskeleton system for low-cost dexterous teleoperation. Our system employs a hand-facing camera to capture 3D hand poses and an exoskeleton mounted on a base that can be easily carried on users' backs. ACE captures both the finger and wrist pose in real-time and enables cross-platform operations. We evaluate the key system parameters compared with previous teleoperation systems and show clear advantages of ACE. We then showcase the desktop and mobile versions of our system on six different robot platforms (including humanoid-hands, arm-hands, arm-gripper, and quadruped-gripper systems), and demonstrate the effectiveness of learning three difficult real-world tasks through the collected demonstration on two of them." />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ACE: A Cross-Platform Visual-Exoskeletons System for Low-Cost Dexterous Teleoperation" />
+    <meta name="twitter:description" content="Bimanual robotic manipulation with dexterous hands has a large potential workability and a wide workspace as it follows the most natural human workflow. Learning from human demonstrations has proven highly effective for learning a dexterous manipulation policy. To collect such data, teleoperation serves as a straightforward and efficient way to do so. However, a cost-effective and easy-to-use teleoperation system is lacking for anthropomorphic robot hands. To fill the deficiency, we developed ACE, a cross-platform visual-exoskeleton system for low-cost dexterous teleoperation. Our system employs a hand-facing camera to capture 3D hand poses and an exoskeleton mounted on a base that can be easily carried on users' backs. ACE captures both the finger and wrist pose in real-time and enables cross-platform operations. We evaluate the key system parameters compared with previous teleoperation systems and show clear advantages of ACE. We then showcase the desktop and mobile versions of our system on six different robot platforms (including humanoid-hands, arm-hands, arm-gripper, and quadruped-gripper systems), and demonstrate the effectiveness of learning three difficult real-world tasks through the collected demonstration on two of them." />
+    <meta name="twitter:image" content="img/cover.jpg" />
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+    
+    <script src="js/app.js"></script>
+    <link rel="icon" href="./favicon.ico">
+
+</head>
+
+<body>
+    <div id="main">
+        <div class="row">
+            <h2 class="col-md-12 text-center" style="font-size: 48px;">
+                <b>ACE</b>: <b>A</b> <b>C</b>ross-platfrom Visual-<b>E</b>xoskeletons <br> for Low-Cost Dexterous Teleoperation</br> 
+            </h2>
+        </div> <br>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a href="https://shiqiyang.github.io" style="font-size: 22px;">
+                          Shiqi Yang
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://minghuanliu.com" style="font-size: 22px;">
+                          Minghuan Liu
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://yzqin.github.io" style="font-size: 22px;">
+                          Yuzhe Qin
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://dingry.github.io" style="font-size: 22px;">
+                          Runyu Ding
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://ace-teleop.github.io" style="font-size: 22px;">
+                          Jialong Li
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://chengxuxin.github.io" style="font-size: 22px;">
+                          Xuxin Cheng
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://rchalyang.github.io" style="font-size: 22px;">
+                          Ruihan Yang
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cs.cmu.edu/~shayi/" style="font-size: 22px;">
+                          Sha Yi
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://xiaolonw.github.io" style="font-size: 22px;">
+                          Xiaolong Wang
+                        </a>
+                    </li><br>
+                    <li>
+                        <!-- <sup style="font-size: 18px;">1</sup><font size="5">UC San Diego</font> -->
+                         <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        <img src="./img/UCSanDiegoLogo-BlueGold.png" width="20%" style="margin-right: 100px;"></img>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="row">
+                <div class="col-md-4 col-md-offset-4 text-center">
+                    <ul class="nav nav-pills nav-justified">
+                        <li>
+                            <a href="https://arxiv.org/abs/">
+                            <image src="img/paper-img.png" height="50px">
+                                <h4><strong>Arxiv</strong></h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://docs.google.com/document/d/1sStEXkSqi03mnFAGhRTtuU14KrGu1ZqmN78boORJfaI/edit#heading=h.2049g7cy3xn2">
+                            <image src="img/documents.png" height="50px">
+                                <h4><strong>Document</strong></h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/Ericonaldo/visual_wholebody">
+                            <image src="img/github.png" height="50px">
+                                <h4><strong>Code</strong></h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://youtu.be/Kfj1ImFLoqI">
+                            <image src="img/youtube_icon.png" height="50px">
+                                <h4><strong>YouTube</strong></h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://b23.tv/EZEa0LS">
+                            <image src="img/bilibili.jpeg" height="50px">
+                                <h4><strong>Bilibili</strong></h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/xiaolonw/status/">
+                            <image src="img/twitter.png" height="50px">
+                                <h4><strong>Twitter</strong></h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                    <p class="text-center" style="font-size: 22px;">
+                    ACE is a cross-platform visual-exoskeleton system for low-cost dexterous teleoperation. 
+                    </p>
+            </div>
+            <div class="col-md-8 col-md-offset-2">
+                <div class="text-center">
+                    <div style="position:relative;width:60%;height:0;padding-bottom:33.75%;margin:auto;">
+                        <iframe src="https://www.youtube.com/embed/Kfj1ImFLoqI?si=bg1q94q0zv41COTD" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                        <!-- <div class="poster-image" style="position:absolute;top:0;left:0;width:100%;height:100%;background-image:url('img/youtube_cover.jpg');background-size:cover;background-position:center;display:block;"></div> -->
+                    </div>
+                </div>
+            </div> 
+        </div>
+
+        <div class="row text-center" style="margin-top: 100px; display: flex; justify-content: center; width: 85%;  gap: 20px; padding-left: 320pt">
+            <div class="text-center" style="width: 48%;">
+                <h3 style="font-size: 26px; font-weight: bold; text-align: center; margin-bottom: 20px;">
+                    Easy to Wear and Easy for Mobile
+                </h3>
+                <video id="video1" width="100%" style="border-radius: 10px;" autoplay loop muted controls>
+                    <source src="img/videos/wear/wear.mp4" type="video/mp4" />
+                </video>
+            </div>
+            <div class="text-center" style="width: 48%;">
+                <h3 style="font-size: 26px; font-weight: bold; text-align: center; margin-bottom: 20px;">
+                    Accurate and Stable Teleoperation
+                </h3>
+                <video id="video2" width="100%" style="border-radius: 10px;" autoplay loop muted controls>
+                    <source src="img/videos/ruler.mp4" type="video/mp4" />
+                </video>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 100px; margin-left: 5px;">
+            <h3 class="col-md-8 col-md-offset-2" style="font-size: 32px; font-weight: bold; text-align:center; margin-bottom: 50px;">
+                Cross-Platform Teleoperation
+            </h3>
+            <div class="text-center" style="column-gap: 40px; line-height: 50px;">
+                <video id="consec1" width="27%" style="border-radius: 10px;" autoplay loop muted controls>
+                    <source src="img/videos/teleop/xarm_welding.mp4" type="video/mp4" />
+                </video>&nbsp;&nbsp;&nbsp;&nbsp;
+                <video id="consec2" width="27%" style="border-radius: 10px;" autoplay loop muted controls>
+                    <source src="img/videos/teleop/h1_pipette.mp4" type="video/mp4" />
+                </video><br>
+                <video id="consec3" width="27%" style="border-radius: 10px;" autoplay loop muted controls>
+                    <source src="img/videos/teleop/gr1_teleop.mp4" type="video/mp4" />
+                </video>&nbsp;&nbsp;&nbsp;&nbsp;
+                <video id="consec4" width="27%" style="border-radius: 10px;" autoplay loop muted controls>
+                    <source src="img/videos/teleop/franka_teleop.mp4" type="video/mp4" />
+                </video><br>
+                <video id="consec5" width="30%" style="border-radius: 10px;" autoplay loop muted controls>
+                    <source src="img/videos/teleop/b1_teleop.mp4" type="video/mp4" />
+                </video>
+            </div>
+        </div>
+
+        <!-- <div class="row" style="margin-top: 100px;">
+            <h3 class="col-md-8 col-md-offset-2" style="font-size: 32px; font-weight: bold; text-align:center; margin-bottom: 50px;">
+                Easy to Wear and Easy for Mobile
+            </h3>
+            <div class="col-md-12 text-center" style="column-gap: 40px; line-height: 30px">
+                <div class="col-md-8 col-md-offset-2">
+                <video id="f2" width="44%" style="border-radius: 10px;" autoplay loop muted controls>
+                    <source src="img/videos/wear/wear.mp4" type="video/mp4" />
+                </video>
+            </div>
+        </div> -->
+
+        <div class="row" style="margin-top: 100px; margin-left: 5px;">
+            <h3 class="col-md-8 col-md-offset-2" style="font-size: 32px; font-weight: bold; text-align:center; margin-bottom: 50px;">
+                Autonomous Skills
+            </h3>
+            <div class="text-center" style="column-gap: 40px; line-height: 50px;">
+                <video id="indoor_vision_chair" width="27%" style="border-radius: 10px;" autoplay loop muted controls>
+                    <source src="img/videos/autonomous/h1_tennis.mp4" type="video/mp4" />
+                </video>&nbsp;&nbsp;&nbsp;&nbsp;
+                <video id="outdoor_vision" width="27%" style="border-radius: 10px;" autoplay loop muted controls>
+                    <source src="img/videos/autonomous/h1_grasp_mix.mp4" type="video/mp4" />
+                </video><br>
+                <video id="indoor_vision" width="27%" style="border-radius: 10px;" autoplay loop muted controls>
+                    <source src="img/videos/autonomous/serve.mp4" type="video/mp4" />
+                </video>&nbsp;&nbsp;&nbsp;&nbsp;
+                <video id="indoor_vision" width="27%" style="border-radius: 10px;" autoplay loop muted controls>
+                    <source src="img/videos/autonomous/keyboard.mp4" type="video/mp4" />
+                </video><br>
+                <video id="indoor_vision" width="27%" style="border-radius: 10px;" autoplay loop muted controls>
+                    <source src="img/videos/autonomous/erase.mp4" type="video/mp4" />
+                </video>&nbsp;&nbsp;&nbsp;&nbsp;
+                <video id="indoor_vision" width="27%" style="border-radius: 10px;" autoplay loop muted controls>
+                    <source src="img/videos/autonomous/xarm_grasp.mp4" type="video/mp4" />
+                </video><br>
+            </div>
+        </div>
+
+        <!-- <div class="row" style="margin-top: 100px;">
+            <h3 class="col-md-8 col-md-offset-2" style="font-size: 32px; font-weight: bold; text-align:center; margin-bottom: 50px;">
+                Accurate and Stable Teleperation
+            </h3>
+            <div class="col-md-12 text-center" style="column-gap: 40px; line-height: 30px">
+                <div class="col-md-8 col-md-offset-2">
+                <video id="f2" width="44%" style="border-radius: 10px;" autoplay loop muted controls>
+                    <source src="img/videos/ruler.mp4" type="video/mp4" />
+                </video>
+            </div>
+        </div> -->
+
+        <div class="row" style="margin-top: 100px;">
+            <h3 class="col-md-8 col-md-offset-2" style="font-size: 32px; font-weight: bold; text-align:center; margin-bottom: 50px;">
+                Hardware Assembly
+            </h3>
+            <div class="col-md-12 text-center" style="column-gap: 40px; line-height: 30px">
+                <div class="col-md-8 col-md-offset-2">
+                <video id="f2" width="44%" style="border-radius: 10px;" autoplay loop muted controls>
+                    <source src="img/youtube.mp4" type="video/mp4" /><br>
+                </video>
+            </div>
+        </div><br>
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3" style="margin-top: 100px;">
+                <h3 style="font-size: 36px; font-weight: bold; text-align:center">
+                    Abstract
+                </h3>
+                <p class="text-justify" style="font-size: 18px;">
+                    Bimanual robotic manipulation with dexterous hands has a large potential workability and a wide workspace as it follows the most natural human workflow. Learning from human demonstrations has proven highly effective for learning a dexterous manipulation policy. To collect such data, teleoperation serves as a straightforward and efficient way to do so. However, a cost-effective and easy-to-use teleoperation system is lacking for anthropomorphic robot hands. To fill the deficiency, we developed <b>ACE, a cross-platform visual-exoskeleton system for low-cost dexterous teleoperation</b>. Our system employs a hand-facing camera to capture 3D hand poses and an exoskeleton mounted on a base that can be easily carried on users' backs. ACE captures both the finger and wrist pose in real-time and enables cross-platform operations. We evaluate the key system parameters compared with previous teleoperation systems and show clear advantages of ACE. We then showcase the desktop and mobile versions of our system on six different robot platforms (including humanoid-hands, arm-hands, arm-gripper, and quadruped-gripper systems), and demonstrate the effectiveness of learning three difficult real-world tasks through the collected demonstration on two of them.
+                </p>
+            </div>
+        </div>
+
+        <section class="section" id="BibTeX">
+            <div class="container content">
+                <h2 class="titile">BibTeX</h2>
+                <pre><code>
+                @article{liu2024visual,
+                title={ACE: A Cross-platfrom Visual-Exoskeletons for Low-Cost Dexterous Teleoperation},
+                author={Yang, Shiqi and Liu, Minghuan and Qin, Yuzhe and Runyu, Ding and Li Jialong and Cheng, Xuxin and Yang, Ruihan and Yi, Sha and Wang, Xiaolong},
+                journal={arXiv preprint arXiv:240},
+                year={2024}
+                }
+                </code></pre>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
