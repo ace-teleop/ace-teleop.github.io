@@ -152,7 +152,7 @@ span.highlight {
   text-align: center!important
 }
 
-img, video {
+/* img, video {
   max-width: 100%;
   height: auto;
 }
@@ -172,4 +172,4 @@ img, video {
 .video-wrapper video {
   width: 100%;
   border-radius: 10px; 
-}
+} */
