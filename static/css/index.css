@@ -84,14 +84,14 @@ body {
 
 .author-block {
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  overflow-x: auto; 
+  flex-wrap: wrap;
+  gap: 10px; 
+  justify-content: center; 
 }
 
 .author-block a {
-  flex: 0 0 auto;
   text-align: center;
+  white-space: nowrap;
 }
 
 .center-logo {
