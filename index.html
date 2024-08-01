@@ -349,5 +349,19 @@
             </div>
         </>
     </div>
+    
+    <script>
+        function adjustMediaSize() {
+            const mediaElements = document.querySelectorAll('img, video');
+            mediaElements.forEach(element => {
+                element.style.width = '100%';
+                element.style.height = 'auto';
+            });
+        }
+
+        window.addEventListener('resize', adjustMediaSize);
+        document.addEventListener('DOMContentLoaded', adjustMediaSize);
+    </script>
+
 </body>
 </html>
