@@ -86,6 +86,11 @@ body {
   display: inline-block;
 }
 
+.center-logo {
+  display: block;
+  margin: 0 auto;
+}
+
 .publication-banner img {
 }
 
