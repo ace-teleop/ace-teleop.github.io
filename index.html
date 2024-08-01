@@ -1,410 +1,637 @@
-
 <!DOCTYPE html>
 <html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="ACE: A Cross-Platform Visual-Exoskeletons System for Low-Cost Dexterous Teleoperation">
+  <meta name="keywords" content="teleoperation, hardware, imitation learning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <title style="font-family: Arial, Helvetica, sans-serif;">ACE: A Cross-Platform Visual-Exoskeletons System for Low-Cost Dexterous Teleoperation</title>
 
-<head lang="en">
-    <meta charset="UTF-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title style="font-family: Arial, Helvetica, sans-serif;">ACE: A Cross-Platform Visual-Exoskeletons System for Low-Cost Dexterous Teleoperation</title>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="./static/js/ajax.googleapis.com_ajax_libs_jquery_3.5.1_jquery.min.js"></script>
+  <script src="./static/js/isInViewport.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
 
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Open Graph data  TODO: modify this later-->
-    <meta property="og:image" content="img/cover.jpg">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1296">
-    <meta property="og:image:height" content="840">
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://ace-teleop.github.io/"/>
-    <meta property="og:title" content="ACE: A Cross-Platform Visual-Exoskeletons System for Low-Cost Dexterous Teleoperation" />
-    <meta property="og:description" content="Bimanual robotic manipulation with dexterous hands has a large potential workability and a wide workspace as it follows the most natural human workflow. Learning from human demonstrations has proven highly effective for learning a dexterous manipulation policy. To collect such data, teleoperation serves as a straightforward and efficient way to do so. However, a cost-effective and easy-to-use teleoperation system is lacking for anthropomorphic robot hands. To fill the deficiency, we developed ACE, a cross-platform visual-exoskeleton system for low-cost dexterous teleoperation. Our system employs a hand-facing camera to capture 3D hand poses and an exoskeleton mounted on a base that can be easily carried on users' backs. ACE captures both the finger and wrist pose in real-time and enables cross-platform operations. We evaluate the key system parameters compared with previous teleoperation systems and show clear advantages of ACE. We then showcase the desktop and mobile versions of our system on six different robot platforms (including humanoid-hands, arm-hands, arm-gripper, and quadruped-gripper systems), and demonstrate the effectiveness of learning three difficult real-world tasks through the collected demonstration on two of them." />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="ACE: A Cross-Platform Visual-Exoskeletons System for Low-Cost Dexterous Teleoperation" />
-    <meta name="twitter:description" content="Bimanual robotic manipulation with dexterous hands has a large potential workability and a wide workspace as it follows the most natural human workflow. Learning from human demonstrations has proven highly effective for learning a dexterous manipulation policy. To collect such data, teleoperation serves as a straightforward and efficient way to do so. However, a cost-effective and easy-to-use teleoperation system is lacking for anthropomorphic robot hands. To fill the deficiency, we developed ACE, a cross-platform visual-exoskeleton system for low-cost dexterous teleoperation. Our system employs a hand-facing camera to capture 3D hand poses and an exoskeleton mounted on a base that can be easily carried on users' backs. ACE captures both the finger and wrist pose in real-time and enables cross-platform operations. We evaluate the key system parameters compared with previous teleoperation systems and show clear advantages of ACE. We then showcase the desktop and mobile versions of our system on six different robot platforms (including humanoid-hands, arm-hands, arm-gripper, and quadruped-gripper systems), and demonstrate the effectiveness of learning three difficult real-world tasks through the collected demonstration on two of them." />
-    <meta name="twitter:image" content="img/cover.jpg" />
-
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
-    <link rel="stylesheet" href="css/app.css">
-
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
-    
-    <script src="js/app.js"></script>
-    <link rel="icon" href="./favicon.ico">
-
+  <link rel="icon" href="./resources/favicon.ico">
+  
+  <script src="https://kit.fontawesome.com/006a5775d5.js" crossorigin="anonymous"></script>
 </head>
-
 <body>
-    <div id="main">
-        <div class="row">
-            <h2 class="col-md-12 text-center" style="font-size: 48px;">
-                <b>ACE</b>: <b>A</b> <b>C</b>ross-platfrom Visual-<b>E</b>xoskeletons <br> for Low-Cost Dexterous Teleoperation</br> 
-            </h2>
-        </div> <br>
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <ul class="list-inline">
-                    <li>
-                        <a href="https://shiqiyang.github.io" style="font-size: 22px;">
-                          Shiqi Yang
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://minghuanliu.com" style="font-size: 22px;">
-                          Minghuan Liu
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://yzqin.github.io" style="font-size: 22px;">
-                          Yuzhe Qin
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://dingry.github.io" style="font-size: 22px;">
-                          Runyu Ding
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://ace-teleop.github.io" style="font-size: 22px;">
-                          Jialong Li
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://chengxuxin.github.io" style="font-size: 22px;">
-                          Xuxin Cheng
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://rchalyang.github.io" style="font-size: 22px;">
-                          Ruihan Yang
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.cs.cmu.edu/~shayi/" style="font-size: 22px;">
-                          Sha Yi
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://xiaolonw.github.io" style="font-size: 22px;">
-                          Xiaolong Wang
-                        </a>
-                    </li><br>
-                    <li>
-                        <!-- <sup style="font-size: 18px;">1</sup><font size="5">UC San Diego</font> -->
-                         <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        <img src="./img/UCSanDiegoLogo-BlueGold.png" width="20%" style="margin-right: 100px;"></img>
-                    </li>
-                </ul>
-            </div>
+  
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+
+          <!-- <h1 class="title is-1 publication-title">
+            <span style="font-weight: normal;">Open-</span>TeleVision <br> <span style="font-weight: normal;">Teleoperation with Immersive Active Visual Feedback</span>
+          </h1> -->
+          <h1 class="title is-1 publication-title" style="font-weight: normal;">
+            <b>ACE</b>: <b>A</b> <b>C</b>ross-platfrom Visual-<b>E</b>xoskeletons <br> for Low-Cost Dexterous Teleoperation</br> 
+          </h1>
+
+          <div class="is-size-4 publication-authors">
+            <span class="author-block">
+              <a href="https://shiqiyang.github.io">Shiqi Yang</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="https://minghuanliu.com">Minghuan Liu</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="https://yzqin.github.io">Yuzhe Qin</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="https://dingry.github.io">Runyu Ding</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="https://ace-teleop.github.io">Jialong Li</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="https://chengxuxin.github.io">Xuxin Cheng</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="https://rchalyang.github.io">Ruihan Yang</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="https://www.cs.cmu.edu/~shayi/">Sha Yi</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="https://xiaolonw.github.io/">Xiaolong Wang</a>
+              <br><br>
+              <img src="./resources/UCSanDiegoLogo-BlueGold.png" width="20%" style="margin-right: 100px;"></img>  <br><br>
+            </span>
+          </div>
+          
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <!-- <span class="link-block">
+                <a href="https://arxiv.org/abs/" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span> -->
+
+              <!-- arXiv Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://ace-teleop.github.io" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>1x Videos</span>
+                </a>
+              </span>
+
+              <!-- Bilibili Link. -->
+              <span class="link-block">
+                <a href="https://ace-teleop.github.io"
+                    class="external-link button is-normal is-rounded is-dark" target="_blank">
+                    <span class="icon">
+                      <i class="fab fa-bilibili"></i>
+                    </span>
+                    <span>Bilibili</span>
+                </a>
+              </span>
+              
+              <!-- twitter Link. -->
+              <span class="link-block">
+                <a href="https://ace-teleop.github.io" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-twitter"></i>
+                  </span>
+                  <span>Summary</span>
+                </a>
+              </span>
+
+              <br>
+              <!-- Hardware. -->
+              <span class="link-block">
+                <a href="https://docs.google.com/document/d/1sStEXkSqi03mnFAGhRTtuU14KrGu1ZqmN78boORJfaI/edit#heading=h.uzo2munay4l1" class="external-link button is-normal is-rounded is-dark" target="_blank">
+                  <span class="icon">
+                      <i class="fas fa-book"></i>
+                  </span>
+                  <span>Hardware</span>
+                </a>
+              </span>
+
+              <!-- Datasets Link. -->
+              <!-- <span class="link-block">
+                <a href="https://drive.google.com/drive/folders/11WO96mUMjmxRo9Hpvm4ADz7THuuGNEMY?usp=sharing" class="external-link button is-normal is-rounded is-dark" target="_blank">
+                  <span class="icon">
+                      <i class="fas fa-database"></i>
+                  </span>
+                  <span>Datasets</span>
+                </a>
+              </span> -->
+
+              <!-- code Link. -->
+              <span class="link-block">
+                <a href="https://ace-teleop.github.io" class="external-link button is-normal is-rounded is-dark" target="_blank">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+
         </div>
-
-
-        <div class="row">
-                <div class="col-md-4 col-md-offset-4 text-center">
-                    <ul class="nav nav-pills nav-justified">
-                        <li>
-                            <a href="https://arxiv.org/abs/">
-                            <image src="img/paper-img.png" height="50px">
-                                <h4><strong>Arxiv</strong></h4>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://docs.google.com/document/d/1sStEXkSqi03mnFAGhRTtuU14KrGu1ZqmN78boORJfaI/edit#heading=h.2049g7cy3xn2">
-                            <image src="img/documents.png" height="50px">
-                                <h4><strong>Document</strong></h4>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/Ericonaldo/visual_wholebody">
-                            <image src="img/github.png" height="50px">
-                                <h4><strong>Code</strong></h4>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://youtu.be/Kfj1ImFLoqI">
-                            <image src="img/youtube_icon.png" height="50px">
-                                <h4><strong>YouTube</strong></h4>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://b23.tv/EZEa0LS">
-                            <image src="img/bilibili.jpeg" height="50px">
-                                <h4><strong>Bilibili</strong></h4>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://twitter.com/xiaolonw/status/">
-                            <image src="img/twitter.png" height="50px">
-                                <h4><strong>Twitter</strong></h4>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-        </div>
-
-        <br>
-        <br>
-        <br>
-
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                    <p class="text-center" style="font-size: 22px;">
-                    ACE is a cross-platform visual-exoskeleton system for low-cost dexterous teleoperation. 
-                    </p>
-            </div>
-            <div class="col-md-8 col-md-offset-2">
-                <div class="text-center">
-                    <div style="position:relative;width:60%;height:0;padding-bottom:33.75%;margin:auto;">
-                        <iframe src="https://www.youtube.com/embed/Kfj1ImFLoqI?si=bg1q94q0zv41COTD" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
-                        <!-- <div class="poster-image" style="position:absolute;top:0;left:0;width:100%;height:100%;background-image:url('img/youtube_cover.jpg');background-size:cover;background-position:center;display:block;"></div> -->
-                    </div>
-                </div>
-            </div> 
-        </div>
-
-        <div class="row text-center" style="margin-top: 100px; display: flex; justify-content: center; width: 85%;  gap: 20px; padding-left: 300pt">
-            <div class="text-center" style="width: 48%;">
-                <h3 style="font-size: 26px; font-weight: bold; text-align: center; margin-bottom: 20px;">
-                    Easy to Wear and Easy for Mobile
-                </h3>
-                <video id="video1" width="100%" style="border-radius: 10px;" autoplay loop muted controls>
-                    <source src="img/videos/wear.mp4" type="video/mp4" />
-                </video>
-            </div>
-            <div class="text-center" style="width: 48%;">
-                <h3 style="font-size: 26px; font-weight: bold; text-align: center; margin-bottom: 20px;">
-                    Accurate and Stable Teleoperation
-                </h3>
-                <video id="video2" width="100%" style="border-radius: 10px;" autoplay loop muted controls>
-                    <source src="img/videos/ruler.mp4" type="video/mp4"/>
-                </video>
-            </div>
-        </div>
-
-        <div class="row" style="margin-top: 100px; margin-left: 5px;">
-            <h3 class="col-md-8 col-md-offset-2" style="font-size: 32px; font-weight: bold; text-align:center; margin-bottom: 50px;">
-                Cross-Platform Teleoperation
-            </h3>
-            <div class="text-center" style="column-gap: 40px; line-height: 50px;">
-                <video id="consec1" width="27%" style="border-radius: 10px;" autoplay loop muted controls>
-                    <source src="img/videos/teleop/h1_pipette.mp4" type="video/mp4" />
-                </video>&nbsp;&nbsp;&nbsp;&nbsp;
-                <video id="consec2" width="27%" style="border-radius: 10px;" autoplay loop muted controls>
-                    <source src="img/videos/teleop/h1_spray.mp4" type="video/mp4" />
-                </video><br>
-                <video id="consec1" width="27%" style="border-radius: 10px;" autoplay loop muted controls>
-                    <source src="img/videos/teleop/xarm_type.mp4" type="video/mp4" />
-                </video>&nbsp;&nbsp;&nbsp;&nbsp;
-                <video id="consec2" width="27%" style="border-radius: 10px;" autoplay loop muted controls>
-                    <source src="img/videos/teleop/xarm_welding.mp4" type="video/mp4" />
-                </video><br>
-                <video id="consec3" width="27%" style="border-radius: 10px;" autoplay loop muted controls>
-                    <source src="img/videos/teleop/gr1_teleop.mp4" type="video/mp4" />
-                </video>&nbsp;&nbsp;&nbsp;&nbsp;
-                <video id="consec4" width="27%" style="border-radius: 10px;" autoplay loop muted controls>
-                    <source src="img/videos/teleop/franka_teleop.mp4" type="video/mp4" />
-                </video><br>
-                <video id="consec5" width="30%" style="border-radius: 10px;" autoplay loop muted controls>
-                    <source src="img/videos/teleop/b1_teleop.mp4" type="video/mp4" />
-                </video>
-            </div>
-        </div>
-
-        <!-- <div class="row" style="margin-top: 100px; margin-left: 5px;">
-            <h3 class="col-md-8 col-md-offset-2" style="font-size: 32px; font-weight: bold; text-align:center; margin-bottom: 50px;">
-                Cross-Platform Teleoperation
-            </h3>
-            <div class="video-container text-center">
-                <div class="video-wrapper">
-                    <video id="consec1" autoplay loop muted controls>
-                        <source src="img/videos/teleop/h1_pipette.mp4" type="video/mp4" />
-                    </video>
-                </div>
-                <div class="video-wrapper">
-                    <video id="consec2" autoplay loop muted controls>
-                        <source src="img/videos/teleop/h1_spray.mp4" type="video/mp4" />
-                    </video>
-                </div>
-                <div class="video-wrapper">
-                    <video id="consec3" autoplay loop muted controls>
-                        <source src="img/videos/teleop/xarm_type.mp4" type="video/mp4" />
-                    </video>
-                </div>
-                <div class="video-wrapper">
-                    <video id="consec4" autoplay loop muted controls>
-                        <source src="img/videos/teleop/xarm_welding.mp4" type="video/mp4" />
-                    </video>
-                </div>
-                <div class="video-wrapper">
-                    <video id="consec5" autoplay loop muted controls>
-                        <source src="img/videos/teleop/gr1_teleop.mp4" type="video/mp4" />
-                    </video>
-                </div>
-                <div class="video-wrapper">
-                    <video id="consec6" autoplay loop muted controls>
-                        <source src="img/videos/teleop/franka_teleop.mp4" type="video/mp4" />
-                    </video>
-                </div>
-                <div class="video-wrapper">
-                    <video id="consec7" autoplay loop muted controls>
-                        <source src="img/videos/teleop/b1_teleop.mp4" type="video/mp4" />
-                    </video>
-                </div>
-            </div>
-        </div> -->
-
-        <!-- <div class="row" style="margin-top: 100px;">
-            <h3 class="col-md-8 col-md-offset-2" style="font-size: 32px; font-weight: bold; text-align:center; margin-bottom: 50px;">
-                Easy to Wear and Easy for Mobile
-            </h3>
-            <div class="col-md-12 text-center" style="column-gap: 40px; line-height: 30px">
-                <div class="col-md-8 col-md-offset-2">
-                <video id="f2" width="44%" style="border-radius: 10px;" autoplay loop muted controls>
-                    <source src="img/videos/wear/wear.mp4" type="video/mp4" />
-                </video>
-            </div>
-        </div> -->
-
-        <div class="row" style="margin-top: 100px; margin-left: 5px;">
-            <h3 class="col-md-8 col-md-offset-2" style="font-size: 32px; font-weight: bold; text-align:center; margin-bottom: 50px;">
-                Autonomous Skills
-            </h3>
-            <div class="text-center" style="column-gap: 40px; line-height: 50px;">
-                <video id="indoor_vision_chair" width="27%" style="border-radius: 10px;" autoplay loop muted controls>
-                    <source src="img/videos/autonomous/h1_tennis.mp4" type="video/mp4" />
-                </video>&nbsp;&nbsp;&nbsp;&nbsp;
-                <video id="outdoor_vision" width="27%" style="border-radius: 10px;" autoplay loop muted controls>
-                    <source src="img/videos/autonomous/h1_grasp_mix.mp4" type="video/mp4" />
-                </video><br>
-                <video id="indoor_vision" width="27%" style="border-radius: 10px;" autoplay loop muted controls>
-                    <source src="img/videos/autonomous/serve.mp4" type="video/mp4" />
-                </video>&nbsp;&nbsp;&nbsp;&nbsp;
-                <video id="indoor_vision" width="27%" style="border-radius: 10px;" autoplay loop muted controls>
-                    <source src="img/videos/autonomous/keyboard.mp4" type="video/mp4" />
-                </video><br>
-                <video id="indoor_vision" width="27%" style="border-radius: 10px;" autoplay loop muted controls>
-                    <source src="img/videos/autonomous/erase.mp4" type="video/mp4" />
-                </video>&nbsp;&nbsp;&nbsp;&nbsp;
-                <video id="indoor_vision" width="27%" style="border-radius: 10px;" autoplay loop muted controls>
-                    <source src="img/videos/autonomous/xarm_grasp.mp4" type="video/mp4" />
-                </video>
-            </div>
-        </div>
-
-        <!-- <div class="row" style="margin-top: 100px;">
-            <h3 class="col-md-8 col-md-offset-2" style="font-size: 32px; font-weight: bold; text-align:center; margin-bottom: 50px;">
-                Accurate and Stable Teleperation
-            </h3>
-            <div class="col-md-12 text-center" style="column-gap: 40px; line-height: 30px">
-                <div class="col-md-8 col-md-offset-2">
-                <video id="f2" width="44%" style="border-radius: 10px;" autoplay loop muted controls>
-                    <source src="img/videos/ruler.mp4" type="video/mp4" />
-                </video>
-            </div>
-        </div> -->
-
-        <div class="row" style="margin-top: 100px;">
-            <h3 class="col-md-8 col-md-offset-2" style="font-size: 32px; font-weight: bold; text-align:center; margin-bottom: 50px;">
-                Hardware Assembly Tutorial
-            </h3>
-            <div class="col-md-12 text-center" style="column-gap: 40px; line-height: 50px">
-                <video id="f2" width="44%" style="border-radius: 10px;" loop muted controls>
-                    <source src="img/youtube.mp4" type="video/mp4" /><br>
-                </video>
-            </div>
-        </div><br><br>
-
-        <div class="row" style="margin-top: 100px;">
-            <h3 style="font-size: 32px; font-weight: bold; text-align:center; margin-bottom: 50px; line-height: 20px">
-                Various Control Modes on Different Platforms
-            </h3>
-        </div>
-        <div class="row text-center" style="display: flex; justify-content: center; width: 85%;  gap: 20px; padding-left: 300pt">
-            <div class="text-center" style="width: 48%;">
-                <h4 style="font-size: 25px; font-weight: bold; text-align: center; margin-bottom: 20px;">
-                    Normal Mode
-                </h4>
-                <video id="video1" width="100%" style="border-radius: 10px;" loop muted controls>
-                    <source src="img/videos/sim/Xarm_normal.mov" type="video/mp4" />
-                </video><br>
-                <video id="video1" width="100%" style="border-radius: 10px;" loop muted controls>
-                    <source src="img/videos/sim/H1_normal.mov" type="video/mp4" />
-                </video><br>
-                <video id="video1" width="100%" style="border-radius: 10px;" loop muted controls>
-                    <source src="img/videos/sim/gr1_normal.mov" type="video/mp4" />
-                </video><br>
-                <video id="video1" width="100%" style="border-radius: 10px;" loop muted controls>
-                    <source src="img/videos/sim/Franka_normal.mov" type="video/mp4" />
-                </video><br>
-            </div>
-            <div class="text-center" style="width: 48%;">
-                <h4 style="font-size: 25px; font-weight: bold; text-align: center; margin-bottom: 20px;">
-                    Mirror Mode
-                </h4>
-                <video id="video1" width="100%" style="border-radius: 10px;" loop muted controls>
-                    <source src="img/videos/sim/Xarm_mirror.mov" type="video/mp4" />
-                </video><br>
-                <video id="video1" width="100%" style="border-radius: 10px;" loop muted controls>
-                    <source src="img/videos/sim/H1_mirror.mov" type="video/mp4" />
-                </video><br>
-                <video id="video1" width="100%" style="border-radius: 10px;" loop muted controls>
-                    <source src="img/videos/sim/gr1_mirror.mov" type="video/mp4" />
-                </video><br>
-                <video id="video1" width="100%" style="border-radius: 10px;" loop muted controls>
-                    <source src="img/videos/sim/Franka_mirror.mov" type="video/mp4" />
-                </video><br>
-            </div>
-        </div>
-
-
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3" style="margin-top: 100px;">
-                <h3 style="font-size: 36px; font-weight: bold; text-align:center">
-                    Abstract
-                </h3>
-                <p class="text-justify" style="font-size: 18px;">
-                    Bimanual robotic manipulation with dexterous hands has a large potential workability and a wide workspace as it follows the most natural human workflow. Learning from human demonstrations has proven highly effective for learning a dexterous manipulation policy. To collect such data, teleoperation serves as a straightforward and efficient way to do so. However, a cost-effective and easy-to-use teleoperation system is lacking for anthropomorphic robot hands. To fill the deficiency, we developed <b>ACE, a cross-platform visual-exoskeleton system for low-cost dexterous teleoperation</b>. Our system employs a hand-facing camera to capture 3D hand poses and an exoskeleton mounted on a base that can be easily carried on users' backs. ACE captures both the finger and wrist pose in real-time and enables cross-platform operations. We evaluate the key system parameters compared with previous teleoperation systems and show clear advantages of ACE. We then showcase the desktop and mobile versions of our system on six different robot platforms (including humanoid-hands, arm-hands, arm-gripper, and quadruped-gripper systems), and demonstrate the effectiveness of learning three difficult real-world tasks through the collected demonstration on two of them.
-                </p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="container content" style="margin-top: 100px;">
-                <h2 class="titile">BibTeX</h2>
-                <pre><code>
-                @article{yang2024ace,
-                title={ACE: A Cross-platfrom Visual-Exoskeletons for Low-Cost Dexterous Teleoperation},
-                author={Yang, Shiqi and Liu, Minghuan and Qin, Yuzhe and Runyu, Ding and Li Jialong and Cheng, Xuxin and Yang, Ruihan and Yi, Sha and Wang, Xiaolong},
-                journal={arXiv preprint arXiv:240},
-                year={2024}
-                }
-                </code></pre>
-            </div>
-        </>
+      </div>
     </div>
-    
-    <!-- <script>
-        function adjustMediaSize() {
-            const mediaElements = document.querySelectorAll('img, video');
-            mediaElements.forEach(element => {
-                element.style.width = '100%';
-                element.style.height = 'auto';
-            });
-        }
+  </div>
+</section>
 
-        window.addEventListener('resize', adjustMediaSize);
-        document.addEventListener('DOMContentLoaded', adjustMediaSize);
-    </script> -->
+<!-- Paper video. -->
+
+<!-- <section class="section" style="padding-bottom: 0">
+  <div class="container">
+    <div id="method_video" class="columns is-centered has-text-centered">
+      <div class="column is-half no-bottom-padding"> -->
+
+        <!-- <video controls src="./camera-ready-video-v2-compressed.mp4" style="border: 1px solid #bbb; border-radius: 10px; width: 100%;"> -->
+
+          <!-- <iframe height="500" src="https://www.youtube.com/embed/d9EQDjU1gyQ?si=s2d5lT_NsK2kiSQs" title="YouTube video player" frameborder="0" style="border: 1px solid #bbb; border-radius: 10px; width: 100%;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <h5 style="text-align: center;">Remote Teleoperation</h5>
+      </div>
+      <div class="column is-half no-bottom-padding"> -->
+
+        <!-- <video controls src="./camera-ready-video-v2-compressed.mp4" style="border: 1px solid #bbb; border-radius: 10px; width: 100%;"> -->
+
+          <!-- <iframe height="500" src="https://www.youtube.com/embed/dsDcD-WT8F8?si=-ckKXTdHuPfQ9ozh" title="YouTube video player" frameborder="0" style="border: 1px solid #bbb; border-radius: 10px; width: 100%;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <h5 style="text-align: center;">Autonomous Skills</h5>
+      </div>
+    </div>
+  </div>
+  <br><br><br>
+</section> -->
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <!-- <div class="column is-two-third">
+        
+      </div> -->
+      <div class="column is-two-thirds">
+        <h5 style="text-align: center;"> ACE is a open-sourced cross-platform visual-exoskeleton system for low-cost dexterous teleoperation.</h5>
+        <tr>
+          <td>
+            <div class="row">
+            <div class="col">
+              <iframe src="https://www.youtube.com/embed/Kfj1ImFLoqI?si=bg1q94q0zv41COTD" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+
+              <!-- <video autoplay muted loop playsinline controls src="./resources/clips/any/anywhere-animate-comp.mp4" width="100%"
+                     style="border-radius:10px; "></video> -->
+
+              <!-- <span class="link-block">
+              <a href="https://youtu.be/JzKQQbm0e3I" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fab fa-youtube"></i>
+                </span>
+                <span>Click for 1x Video</span>
+              </a>
+              </span> -->
+              
+            </div>
+
+            </div>
+            <br>
+            <div class="row">
+              <div class="col">
+                <h5 style="text-align: center;">Easy to Wear and Easy for Mobile</h5>
+                  <video autoplay muted loop playsinline controls src="./resources/clips/sub/wear.mp4" width="100%"
+                         style="border-radius:10px; "></video>
+              </div>
+              
+              <div class="col">
+                <h5 style="text-align: center;">Accurate and Stable Teleoperation</h5>
+                <video autoplay muted loop playsinline controls src="./resources/clips/sub/ruler.mp4" width="100%"
+                       style="border-radius:10px; "></video>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </div> 
+    </div>
+  </div>
+</section>
+
+<section class="section">
+
+  <section class="section">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Cross-Platform Teleoperation</h2>
+          <h5 style="text-align: center;">The <span style="color: rgb(255, 0, 0);">low-cost</span> teleoperation system can be <span style="color: rgb(255, 0, 0);">quickly</span> applied to various <span style="color: rgb(255, 0, 0);">end-effectors</span> and <span style="color: rgb(255, 0, 0);">robots</span>.</h5>
+          <br>
+          <tr>
+            <td>
+              <div class="row">
+                <div class="col">
+                    <video autoplay muted loop playsinline controls src="./resources/clips/tele/xarm_welding.mp4" width="100%"
+                           style="border-radius:10px; "></video>
+                           
+                           <span class="link-block">
+                            <a href="https://ace-teleop.github.io" target="_blank"
+                                class="external-link button is-normal is-rounded is-dark">
+                              <span class="icon">
+                                  <i class="fab fa-youtube"></i>
+                              </span>
+                              <span>Click for 1x Video</span>
+                            </a>
+                            </span>
+                           
+                </div>
+                <div class="col">
+                  <video autoplay muted loop playsinline controls src="./resources/clips/tele/xarm_type.mp4" width="100%"
+                         style="border-radius:10px; "></video>
+                         
+                         <span class="link-block">
+                          <a href="https://ace-teleop.github.io" target="_blank"
+                              class="external-link button is-normal is-rounded is-dark">
+                            <span class="icon">
+                                <i class="fab fa-youtube"></i>
+                            </span>
+                            <span>Click for 1x Video</span>
+                          </a>
+                          </span>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col">
+                    <video autoplay muted loop playsinline controls src="./resources/clips/tele/h1_pipette.mp4" width="100%"
+                           style="border-radius:10px; "></video>
+                           
+                           <span class="link-block">
+                            <a href="https://ace-teleop.github.io" target="_blank"
+                                class="external-link button is-normal is-rounded is-dark">
+                              <span class="icon">
+                                  <i class="fab fa-youtube"></i>
+                              </span>
+                              <span>Click for 1x Video</span>
+                            </a>
+                            </span>
+                </div>
+                <div class="col">
+                  <video autoplay muted loop playsinline controls src="./resources/clips/tele/h1_spray.mp4" width="100%"
+                         style="border-radius:10px; "></video>
+                         
+                         <span class="link-block">
+                          <a href="https://ace-teleop.github.io" target="_blank"
+                              class="external-link button is-normal is-rounded is-dark">
+                            <span class="icon">
+                                <i class="fab fa-youtube"></i>
+                            </span>
+                            <span>Click for 1x Video</span>
+                          </a>
+                          </span>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col">
+                    <video playsinline autoplay loop muted controls src="./resources/clips/tele/b1_teleop.mp4" width="100%"
+                           style="border-radius:10px; "></video>
+                           <span class="link-block">
+                            <a href="https://ace-teleop.github.io" target="_blank"
+                                class="external-link button is-normal is-rounded is-dark">
+                              <span class="icon">
+                                  <i class="fab fa-youtube"></i>
+                              </span>
+                              <span>Click for 1x Video</span>
+                            </a>
+                            </span>
+                </div>
+                <div class="col">
+                  <video playsinline autoplay loop muted controls src="./resources/clips/tele/gr1_teleop.mp4" width="100%"
+                         style="border-radius:10px; "></video>
+                         <span class="link-block">
+                          <a href="https://ace-teleop.github.io" target="_blank"
+                              class="external-link button is-normal is-rounded is-dark">
+                            <span class="icon">
+                                <i class="fab fa-youtube"></i>
+                            </span>
+                            <span>Click for 1x Video</span>
+                          </a>
+                          </span>
+                </div>
+                <div class="row">
+                  <div class="col">
+                      <video playsinline autoplay loop muted controls src="./resources/clips/tele/franka_teleop.mp4" width="100%"
+                             style="border-radius:10px; "></video>
+                             <span class="link-block">
+                              <a href="https://ace-teleop.github.io" target="_blank"
+                                  class="external-link button is-normal is-rounded is-dark">
+                                <span class="icon">
+                                    <i class="fab fa-youtube"></i>
+                                </span>
+                                <span>Click for 1x Video</span>
+                              </a>
+                              </span>
+                  </div>
+                  <div class="col">
+                    <video playsinline autoplay loop muted controls src="./resources/clips/tele/franka_teleop.mp4" width="100%"
+                           style="border-radius:10px; "></video>
+                           <span class="link-block">
+                            <a href="https://ace-teleop.github.io" target="_blank"
+                                class="external-link button is-normal is-rounded is-dark">
+                              <span class="icon">
+                                  <i class="fab fa-youtube"></i>
+                              </span>
+                              <span>Click for 1x Video</span>
+                            </a>
+                            </span>
+                  </div>
+              </div>
+              <br>
+              
+              <br>
+            </td>
+          </tr>
+        </div> 
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Fully Autonomous Skills</h2>
+          <tr>
+            <td>
+              <div class="row">
+                <div class="col">
+                    <video autoplay muted loop playsinline controls src="./resources/clips/auto/keyboard.mp4" width="100%"
+                           style="border-radius:10px; "></video>
+                           
+                    <span class="link-block">
+                    <a href="https://ace-teleop.github.io" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                          <i class="fab fa-youtube"></i>
+                      </span>
+                      <span>Click for 1x Video</span>
+                    </a>
+                    </span>
+                </div>
+                <div class="col">
+                  <video autoplay muted loop playsinline controls src="./resources/clips/auto/erase.mp4" width="100%"
+                         style="border-radius:10px; "></video>
+                  
+                  <span class="link-block">
+                  <a href="https://ace-teleop.github.io" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Click for 1x Video</span>
+                  </a>
+                  </span>
+
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                    <video autoplay muted loop playsinline controls src="./resources/clips/auto/serve.mp4" width="100%"
+                           style="border-radius:10px; "></video>
+                           
+                    <span class="link-block">
+                    <a href="https://ace-teleop.github.io" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                          <i class="fab fa-youtube"></i>
+                      </span>
+                      <span>Click for 1x Video</span>
+                    </a>
+                    </span>
+                </div>
+                <div class="col">
+                  <video autoplay muted loop playsinline controls src="./resources/clips/auto/xarm_grasp.mp4" width="100%"
+                         style="border-radius:10px; "></video>
+                  
+                  <span class="link-block">
+                  <a href="https://ace-teleop.github.io" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Click for 1x Video</span>
+                  </a>
+                  </span>
+
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                    <video autoplay muted loop playsinline controls src="./resources/clips/auto/h1_tennis.mp4" width="100%"
+                           style="border-radius:10px; "></video>
+                           
+                    <span class="link-block">
+                    <a href="https://ace-teleop.github.io" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                          <i class="fab fa-youtube"></i>
+                      </span>
+                      <span>Click for 1x Video</span>
+                    </a>
+                    </span>
+                </div>
+                <div class="col">
+                  <video autoplay muted loop playsinline controls src="./resources/clips/auto/h1_grasp_mix.mp4" width="100%"
+                         style="border-radius:10px; "></video>
+                  
+                  <span class="link-block">
+                  <a href="https://ace-teleop.github.io" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Click for 1x Video</span>
+                  </a>
+                  </span>
+
+                </div>
+              </div>
+            </td>
+          </tr>
+        </div> 
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Various Control Modes on Different Platforms</h2>
+          <tr>
+            <td>
+              <div class="row">
+                <div class="col">
+                  <h5 style="text-align: center;">Normal Mode</h5>
+                </div>
+                <div class="col">
+                  <h5 style="text-align: center;">Mirror Mode</h5>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col">
+                    <video autoplay muted loop playsinline controls src="./resources/clips/sim/Xarm_normal.mov" width="100%"
+                           style="border-radius:10px; "></video>
+                </div>
+                <div class="col">
+                  <video autoplay muted loop playsinline controls src="./resources/clips/sim/Xarm_mirror.mov" width="100%"
+                         style="border-radius:10px; "></video>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col">
+                    <video autoplay muted loop playsinline controls src="./resources/clips/sim/H1_normal.mov" width="100%"
+                           style="border-radius:10px; "></video>
+                </div>
+                <div class="col">
+                  <video autoplay muted loop playsinline controls src="./resources/clips/sim/H1_mirror.mov" width="100%"
+                         style="border-radius:10px; "></video>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col">
+                    <video playsinline autoplay loop muted controls src="./resources/clips/sim/gr1_normal.mov" width="100%"
+                           style="border-radius:10px; "></video>
+                </div>
+                <div class="col">
+                  <video playsinline autoplay loop muted controls src="./resources/clips/sim/gr1_mirror.MOV" width="100%"
+                         style="border-radius:10px; "></video>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col">
+                    <video playsinline autoplay loop muted controls src="./resources/clips/sim/Franka_normal.mov" width="100%"
+                           style="border-radius:10px; "></video>
+                </div>
+                <div class="col">
+                  <video playsinline autoplay loop muted controls src="./resources/clips/sim/Franka_mirror.mov" width="100%"
+                         style="border-radius:10px; "></video>
+                </div>
+              </div>
+              <br>
+              <br>
+            </td>
+          </tr>
+        </div> 
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Hardware Assembly Tutorial</h2>
+          <tr>
+            <td>
+              <div class="row">
+                <div class="col">
+                  <iframe src="https://www.youtube.com/embed/Kfj1ImFLoqI?si=bg1q94q0zv41COTD" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                </div>
+                </div>
+                <br>
+            </td>
+          </tr>
+        </div> 
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h2 class="title is-2">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Bimanual robotic manipulation with dexterous hands has a large potential workability and a wide workspace as it follows the most natural human workflow. Learning from human demonstrations has proven highly effective for learning a dexterous manipulation policy. To collect such data, teleoperation serves as a straightforward and efficient way to do so. However, a cost-effective and easy-to-use teleoperation system is lacking for anthropomorphic robot hands. To fill the deficiency, we developed <b>ACE, a cross-platform visual-exoskeleton system for low-cost dexterous teleoperation</b>. Our system employs a hand-facing camera to capture 3D hand poses and an exoskeleton mounted on a base that can be easily carried on users' backs. ACE captures both the finger and wrist pose in real-time and enables cross-platform operations. We evaluate the key system parameters compared with previous teleoperation systems and show clear advantages of ACE. We then showcase the desktop and mobile versions of our system on six different robot platforms (including humanoid-hands, arm-hands, arm-gripper, and quadruped-gripper systems), and demonstrate the effectiveness of learning three difficult real-world tasks through the collected demonstration on two of them.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- <section class="section">
+  <div class="container">
+    <h2 class="title is-2" style="text-align: center;" id="press-coverage">Media</h2>
+    <br>
+    <div class="columns is-centered">
+      <div class="column is-centered has-text-centered" style="background-color: #1C1A38;">
+        <a target="_blank" href="https://techxplore.com/news/2024-07-television-vr-remote-robot.html">
+          <img src="https://techx.b-cdn.net/tmpl/v2/img/logotype.svg" width="100%"></img>
+        </a>
+      </div>
+      <div class="column is-centered has-text-centered">
+        <a target="_blank" href="https://venturebeat.com/ai/open-television-why-human-intelligence-could-be-the-key-to-next-gen-robotic-automation/">
+          <img src="https://vbstatic.co/brand/img/logos/VB_Extended_Logo_60H.png" width="100%"></img>
+        </a>
+      </div>
+      
+      <div class="column is-centered has-text-centered">
+        <a target="_blank" href="https://www.therobotreport.com/mit-uc-san-diego-researchers-create-open-television-immersive-teleoperation/">
+          <img src="https://www.therobotreport.com/wp-content/uploads/2022/10/TheRobotReport_logo-notag.png" width="100%"></img>
+        </a>
+      </div>
+      <div class="column is-centered has-text-centered" style="background-color: #2A73B4;">
+        <a target="_blank" href="https://interestingengineering.com/innovation/open-television-robotics-control">
+          <img src="https://interestingengineering.com/img/logo.svg" width="100%"></img>
+        </a>
+      </div>
+  </div>
+</section> -->
+
+<section class="section" id="BibTeX">
+  <div class="container content">
+    <h2 class="titile">BibTeX</h2>
+    <pre><code>
+@article{yang2024ace,
+  title={ACE: A Cross-platfrom Visual-Exoskeletons for Low-Cost Dexterous Teleoperation},
+  author={Yang, Shiqi and Liu, Minghuan and Qin, Yuzhe and Runyu, Ding and Li Jialong and Cheng, Xuxin and Yang, Ruihan and Yi, Sha and Wang, Xiaolong},
+  journal={arXiv preprint arXiv:240},
+  year={2024}
+  }
+    </code></pre>
+  </div>
+</section>
+
 
 </body>
+
+<script>
+  var mainLoopId = setInterval(function(){
+        $('video').not('#teaser').each(function(){
+      if ($(this).is(":in-viewport")) {
+          $(this)[0].play();
+      } else {
+          $(this)[0].pause();
+      }
+      })
+    },200);
+</script>
+
 </html>
