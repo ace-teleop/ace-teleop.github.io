@@ -156,3 +156,20 @@ img, video {
   max-width: 100%;
   height: auto;
 }
+
+.video-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px; 
+}
+
+.video-wrapper {
+  flex: 0 1 calc(50% - 20px); 
+  margin-bottom: 20px;
+}
+
+.video-wrapper video {
+  width: 100%;
+  border-radius: 10px; 
+}
